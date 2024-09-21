@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <title>Dumorando.com</title>
+  <link rel="shortcut icon" href="https://github.com/dumorando.png" type="image/x-icon">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+  <!-- <audio src="onlittlecatfeet.mp3" autoplay loop></audio> -->
+   <!--
+  
+   -->
+  <!-- 
+   
+  -->
+  <main id="everything">
+    <div class="left">
+      <main-but-for-the-left-side>
+        <div class="container transparent ml-5">
+          <nav>
+            <button id="breakfast" class="button-30">
+              breakfast's website
+            </button><br />
+            <button id="home" class="button-30">
+              home
+            </button><br />
+            <button id="biography" class="button-30">
+              biography
+            </button><br />
+            <button id="projects" class="button-30">
+              projects
+            </button><br />
+            <button id="contact" class="button-30">
+              contact me
+            </button><br />
+            <button id="credits" class="button-30">
+              credits
+            </button><br />
+            <button id="link-tree" class="button-30">
+              linktree
+            </button><br />
+          </nav>
+        </div>
+      </main-but-for-the-left-side>
+    </div>
+    <div class="middle">
+      <main-other>
+        <div class="container rainbow">
+          <content id="homepage">
+            <center>
+              <img src="https://static-content-assets-dev.dumorando.com/DumorandoContent/dumo-removebg-preview.png" alt="a slightly annoyed cat" height="150">
+              <h1 id="randomgreeting">hey there</h1>
+              <p>i'm dumorando, a developer.</p>
+              <p style="font-size: smaller">you are the <%= count %> visitor</p>
+            </center>
+          </content>
+          <content id="biography-page">
+            <h1>biography</h1>
+            <p>i am a <b>human being</b> <i>(surprise)</i> who enjoys programming and other</p>
+            <p>activities (such as <i>video gaming</i>, <i>being with friends</i>).</p>
+            <p>check my projects page for the results of my programming enjoyment.</p>
+            <p>i am not good at art or music production, unfortunately.</p>
+          </content>
+          <content id="projects-page">
+            <h1>projects</h1>
+            <p>i make a lot of web things.</p>
+            <p>some of the more notable <i>web things</i> i have created are</p>
+            <p><a href="https://semisocial.chat">semisocial</a>,</p>
+            <p><a href="https://javascript.dumorando.com">dumo.js</a> (<i>outdated</i>),</p>
+            <p><a href="https://dumosgamemaker.vercel.app">dumos game maker</a> (<i>outdated</i>),</p>
+           <!--  <p><a href="/forums">the dumorando forums</a>,</p> -->
+            
+            <p>and <a href="https://uwu.dumorando.com">uwuify</a></p>
+          </content>
+          <content id="contact-page">
+            <h1>contact</h1>
+            <p>you can contact me through email. my personal email address is</p>
+            <p><a href="mailto:dumorando@proton.me">dumorando@proton.me</a>.</p>
+            <p><i>please don't spam it.</i></p>
+          </content>
+          <content id="credits-page">
+            <h1>credits</h1>
+            <p>various elements of this website were inspired by <a href="https://billwurtz.com">bill wurtz</a></p>
+            <p>and some from <a href="https://john.citrons.xyz">various websites on johnvertisement</a></p>
+            <p><i>music from oneshot</i></p>
+          </content>
+          <content id="linktree">
+            <h1>my linktree</h1>
+            <p>i can't fit all the links in right here, but i can link to my linktree</p>
+            <a href="https://linktr.ee/dumorando">linktr.ee/dumorando</a>
+          </content>
+        </div>
+      </main-other>
+    </div>
+    <div class="right">
+      <main-but-for-the-right-side>
+        <div class="container transparent mr-5 textalignthing">
+          <nav>
+            <button id="nextWr" class="button-30">
+              next
+            </button><br />
+            <img 
+            src="https://steve0greatness.github.io/webring/logo2-light-500.webp" 
+            alt="Steve0greatness Webring Logo"
+            width="150"><br />
+            <button id="previousWr" class="button-30">
+              previous
+            </button>
+          </nav>
+        </div>
+      </main-but-for-the-right-side>
+    </div>
+  </main>
+  <main id="toosmall">
+    <div class="left"></div>
+    <div class="middle">
+      <main-other>
+        <div class="container">
+          <h1>screen too small!</h1>
+          <p>maybe try rotating your device?</p>
+        </div>
+      </main-other>
+    </div>
+    <div class="right"></div>
+  </main>
+  <script>
+
+    //pages
+
+    // super cool automation 
+    var pages = {
+      "Home": "homepage",
+      "Biography": "biography-page",
+      "Projects": "projects-page",
+      "Contact": "contact-page",
+      "Credits": "credits-page",
+      "Link-tree": "linktree"
+    };
+
+    Array.prototype.random = function () {
+      return this[Math.floor((Math.random()*this.length))];
+    }
+
+    const randomgreeting = [
+      'greetings',
+      'hey there!',
+      'hi.',
+      'what\'s up',
+      'how do you do',
+      'nice to meet ya',
+      'hey',
+      'hello',
+      'hi',
+      'hows it going?',
+      'nice to see you'
+    ];
+
+    $('#randomgreeting').text(randomgreeting.random());
+
+    function Resizehandler(){
+      if (window.innerHeight > window.innerWidth - 75) {
+        $('#toosmall').show();
+        $('#everything').hide();
+      } else {
+        $('#toosmall').hide();
+        $('#everything').show();
+      }
+    }
+
+    window.addEventListener('resize', Resizehandler);
+
+    Resizehandler();
+
+    $('#nextWr').on('click', function() {
+      window.location = 'https://steve0greatness.github.io/webring/sites/dumorando/next.xhtml';
+    });
+
+    $('#previousWr').on('click', function() {
+      window.location = 'https://steve0greatness.github.io/webring/sites/dumorando/prev.xhtml';
+    });
+
+    function goto(page) {
+      document.title = `${page} - Dumorando.com`;
+      for (const [key, val] of Object.entries(pages)) {
+        if (key !== page) {
+          //kill it
+          document.getElementById(val).style.display = 'none';
+        } else {
+          //show it
+          document.getElementById(val).style.display = '';
+        }
+      }
+    }
+
+    goto('Home');
+
+    for (const key of Object.keys(pages)) {
+      document.getElementById(key.toLowerCase()).addEventListener('click', () => goto(key));
+    }
+    /*
+    function handlehashchange() {
+        if (Object.keys(pages).includes(location.hash)){
+            goto(location.hash);
+        }
+    }
+    window.onhashchange = handlehashchange;
+    */
+    document.getElementById('breakfast').addEventListener('click', () => window.location = 'https://breakfast.pages.gay');
+  </script>
+</body>
+
+</html>
