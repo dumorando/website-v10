@@ -6,8 +6,9 @@ const logger = require('morgan');
 const fs = require('fs');
 const { sha256 } = require('js-sha256');
 const requestIp = require('request-ip');
+var status = require('statuses');
 
-const indexRouter = require('./routes/index');
+//const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
@@ -46,15 +47,52 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+
+/**
+ * 
+ * @param {any} err 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ * @returns 
+ */
+function errorhandler(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
-});
+  
+  // only render if encoding isnt json/plain/xml
+  if (!req.query.encoding) return res.render('error');
+
+  switch (req.query.encoding) {
+    case "plain":
+      res.type('txt').send(status(err.status || 500));
+      break;
+    case "json":
+      res.json({ status: err.status, message: status(err.status || 500) });
+      break;
+    case "xml":
+      //i hate making xml
+      res.type('xml').send(`
+<dumorando>
+  <status>${err.status}</status>
+  <message>${status(err.status || 500)}</message>
+</dumorando>
+      `.trim());
+      break;
+    case "human":
+      res.render('error');
+      break;
+    default:
+      res.type('txt').send('invalid encoding');
+      break;
+  }
+}
+
+app.use(errorhandler);
 
 
 

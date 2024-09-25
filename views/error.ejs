@@ -8,28 +8,42 @@
   <title>Error - Dumorando.com</title>
   <link rel="shortcut icon" href="https://github.com/dumorando.png" type="image/x-icon">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link rel="stylesheet" href="/stylesheets/errorpage.css">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+
+  <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.7/underscore-umd-min.js"></script>
+  <script src="https://npmcdn.com/underscore.string@3.3.6/dist/underscore.string.min.js"></script>
 </head>
 
 <body>
-  <!-- <audio src="onlittlecatfeet.mp3" autoplay loop></audio> -->
-   <!--
-  
-   -->
-  <!-- 
-   
-  -->
+  <p id="hidden-errorcode" style="display: none;"><%= error.status %></p>
   <main id="gfdgfdgfd">
     <div class="left"></div>
     <div class="middle">
       <main-other>
-        <div class="container">
-          <h1>error</h1>
-          <p><%= error.status %></p>
+        <div class="container transparent center">
+          <h1 class="error-code animate__tada animate__animated"><%= error.status %></h1>
+          <p id="statusmeaning">Loading..</p>
         </div>
       </main-other>
     </div>
     <div class="right"></div>
   </main>
+  <script>
+    $(function() {
+      var errorcode = $('#hidden-errorcode').text().trim();
+
+      //get the status code map from jsdelivr
+      fetch('https://cdn.jsdelivr.net/npm/statuses@2.0.1/codes.json').then(data => data.json()).then(data => {
+        var show = s.capitalize(data[errorcode].toLowerCase()+"!");
+        $('#statusmeaning').text(show);
+      });
+    });
+  </script>
 </body>
 
 </html>

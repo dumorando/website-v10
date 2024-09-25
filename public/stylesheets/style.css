@@ -147,7 +147,7 @@ a {color:white;}
   inherits: false;
 }
 
-.container:hover {
+.container:not(.transparent):hover {
   background-color: #222;
 }
 

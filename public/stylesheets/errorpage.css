@@ -1,0 +1,21 @@
+/* may or may not have taken it from forgejo */
+h1.error-code {
+    font-size: 15em;
+    font-weight: var(--font-weight-bold);
+    color: transparent;
+    --error-code-color-1: #a2a2a2;
+    --error-code-color-2: #797979;
+    --gradient: repeating-linear-gradient( 45deg, var(--error-code-color-1), var(--error-code-color-1) 10px, var(--error-code-color-2) 10px, var(--error-code-color-2) 20px );
+    background: var(--gradient);
+    background-clip: text;
+    margin: 0;
+    padding: 0;
+}
+
+.center {
+    text-align: center;
+}
+
+.hidden-errorcode {
+    display: none;
+}
