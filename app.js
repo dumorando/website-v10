@@ -8,6 +8,7 @@ const { sha256 } = require('js-sha256');
 const requestIp = require('request-ip');
 var status = require('statuses');
 const Database = require('./database');
+const os = require('os');
 
 //const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -39,6 +40,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+function GetExtrasettings(req) {
+  if (!req.query.dumospecialsettings) return {};
+
+  try {
+    atob(req.query.dumospecialsettings);
+    JSON.parse(atob(req.query.dumospecialsettings));
+    return JSON.parse(atob(req.query.dumospecialsettings));
+  } catch {
+    return {};
+  }
+}
+
 //const Counterpath = path.join(__dirname, 'counter.txt');
 
 //if (!fs.existsSync(Counterpath)) fs.writeFileSync(Counterpath, '0');
@@ -50,7 +63,35 @@ app.get('/', function(req, res, next) {
     db.push('visitorhashes', sha256(requestIp.getClientIp(req)));
     count++;
   }
-  res.render('index', { count: getNumberWithOrdinal(count) });
+  
+  // encoding stuff
+  if (!req.query.encoding) return res.render('index', { count: getNumberWithOrdinal(count) });
+
+  const extrasettings = GetExtrasettings(req);
+
+  switch (req.query.encoding) {
+    case "plain":
+      res.type('txt').send(`${count};${extrasettings.roundUptime === true ? Math.round(os.uptime()) : os.uptime()}`);
+      break;
+    case "json":
+      res.json({ count, uptime: extrasettings.roundUptime === true ? Math.round(os.uptime()) : os.uptime() });
+      break;
+    case "xml":
+      //i hate making xml
+      res.type('xml').send(`
+<dumorando>
+  <uptime>${extrasettings.roundUptime === true ? Math.round(os.uptime()) : os.uptime()}</uptime>
+  <count>${count}</count>
+</dumorando>
+      `.trim());
+      break;
+    case "human":
+      res.render('index', { count: getNumberWithOrdinal(count) })
+      break;
+    default:
+      res.type('txt').send('invalid encoding');
+      break;
+  }
 });
 
 app.use('/users', usersRouter);
