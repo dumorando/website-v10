@@ -3,15 +3,31 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const fs = require('fs');
+//const fs = require('fs');
 const { sha256 } = require('js-sha256');
 const requestIp = require('request-ip');
 var status = require('statuses');
+const Database = require('./database');
 
 //const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
+const db = new Database('./database.json');
+
+if (!db.has('visitors')) {
+  db.set('visitors', 0);
+}
+if (!db.has('visitorhashes')) {
+  db.set('visitorhashes', []);
+}
+
+function getNumberWithOrdinal(n) {
+  var s = ["th", "st", "nd", "rd"],
+      v = n % 100;
+  return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,20 +39,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const Counterpath = path.join(__dirname, 'counter.txt');
-const HashedIps = [];
+//const Counterpath = path.join(__dirname, 'counter.txt');
 
-if (!fs.existsSync(Counterpath)) fs.writeFileSync(Counterpath, '0');
+//if (!fs.existsSync(Counterpath)) fs.writeFileSync(Counterpath, '0');
 
 app.get('/', function(req, res, next) {
-  let count = parseInt(fs.readFileSync(Counterpath, 'utf-8'));
-  let numsuf = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th']; //credit to godslayerakp
-  if (!HashedIps.includes(sha256(requestIp.getClientIp(req)))) {
-    fs.writeFileSync(Counterpath, String(count+1));
+  let count = db.get('visitors');
+  if (!db.get('visitorhashes').includes(sha256(requestIp.getClientIp(req)))) {
+    db.add('visitors', 1);
+    db.push('visitorhashes', sha256(requestIp.getClientIp(req)));
     count++;
-    HashedIps.push(sha256(requestIp.getClientIp(req)));
   }
-  res.render('index', { count: count + numsuf[parseInt(String(count).slice(-1))] });
+  res.render('index', { count: getNumberWithOrdinal(count) });
 });
 
 app.use('/users', usersRouter);
@@ -93,7 +107,5 @@ function errorhandler(err, req, res, next) {
 }
 
 app.use(errorhandler);
-
-
 
 module.exports = app;

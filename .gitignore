@@ -60,5 +60,5 @@ typings/
 # next.js build output
 .next
 
-# counter (will automatically regen)
-counter.txt
+# database (regenerates)
+database.json
