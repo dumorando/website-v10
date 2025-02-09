@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "cross-env DEBUG=newdumorandosite:* ./bin/www",
-    "development": "nodemon --exec npm start",
+    "development": "nodemon -e js --exec npm start",
     "prod": "node ./bin/www"
   },
   "dependencies": {

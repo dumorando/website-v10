@@ -1,0 +1,56 @@
+@import url(https://fonts.googleapis.com/css2?family=VT323&display=swap);
+
+@font-face {
+	font-family: "regular";
+	src: url(/extp/friends/style/font/rayne.ttf);
+}
+
+.rayne-bg {
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    font-family: "regular", "VT323";
+    background-image: url(/extp/friends/style/imgs/spacebg.gif);
+    color: #fff;
+    line-height: 1.2rem;
+    font-size: 1.1rem;
+    image-rendering: pixelated;
+    animation: rayne-bgscroll 4s linear infinite forwards;
+    align-items: center;
+    min-height: calc(100vh - 20px);
+}
+/*
+--content-width: 900px;
+	--main-color: #ff6cb0;
+	--links: #ffabdb;
+	--panel-bg: #2f1838de;
+*/
+.rayne-panel {
+    background-color: #2f1838de;
+    outline: solid 2px #ff6cb0;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+	padding: 20px!important;
+	width: calc(100% - 40px);
+	display: block;
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.rayne-panel h1 {
+    text-decoration-style: wavy;
+    text-decoration-line: underline;
+    text-decoration-color: #fc99ff;
+    font-size: 2rem;
+}
+
+@keyframes rayne-bgscroll {
+    0% {
+        background-position: 0px 0px;
+    }
+    100% {
+        background-position: 0px 234px;
+    }
+}

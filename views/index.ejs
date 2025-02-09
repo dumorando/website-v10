@@ -23,9 +23,7 @@
       <main-but-for-the-left-side>
         <div class="container transparent ml-5">
           <nav>
-            <button id="breakfast" class="button-30">
-              breakfast's website
-            </button><br />
+            
             <button id="home" class="button-30">
               home
             </button><br />
@@ -44,6 +42,7 @@
             <button id="link-tree" class="button-30">
               linktree
             </button><br />
+            
           </nav>
         </div>
       </main-but-for-the-left-side>
@@ -55,44 +54,50 @@
             <center>
               <img src="https://static-content-assets-dev.dumorando.com/DumorandoContent/dumo-removebg-preview.png" alt="a slightly annoyed cat" height="150">
               <h1 id="randomgreeting">hey there</h1>
-              <p>i'm dumorando, a developer.</p>
+              <p>im dumorando, a programmer.</p>
               <p style="font-size: smaller">you are the <%= count %> visitor</p>
             </center>
           </content>
           <content id="biography-page">
             <h1>biography</h1>
-            <p>i am a <b>human being</b> <i>(surprise)</i> who enjoys programming and other</p>
-            <p>activities (such as <i>video gaming</i>, <i>being with friends</i>).</p>
+            <p>i am a somewhat lame kid who enjoys programming and other</p>
+            <p>activities obviously like playing games and being with my friends.</p>
             <p>check my projects page for the results of my programming enjoyment.</p>
-            <p>i am not good at art or music production, unfortunately.</p>
+            <p>unlike some other people that are like me, i cant make art or music for shit.</p>
           </content>
           <content id="projects-page">
             <h1>projects</h1>
-            <p>i make a lot of web things.</p>
-            <p>some of the more notable <i>web things</i> i have created are</p>
+            <p>i make a lot of web things and websites.</p>
+            <p>some of the more notable web things i have created are</p>
             <p><a href="https://semisocial.chat">semisocial</a>,</p>
             <p><a href="https://javascript.dumorando.com">dumo.js</a> (<i>outdated</i>),</p>
             <p><a href="https://dumosgamemaker.vercel.app">dumos game maker</a> (<i>outdated</i>),</p>
            <!--  <p><a href="/forums">the dumorando forums</a>,</p> -->
             
-            <p>and <a href="https://uwu.dumorando.com">uwuify</a></p>
+            <p>and <a href="https://uwu.dumorando.com">uwuify</a> (note: this is not notable)</p>
           </content>
           <content id="contact-page">
             <h1>contact</h1>
-            <p>you can contact me through email. my personal email address is</p>
-            <p><a href="mailto:dumorando@proton.me">dumorando@proton.me</a>.</p>
-            <p><i>please don't spam it.</i></p>
+            <p>there are various ways you can contact me. one thing i need to</p>
+            <p>note is that i was part of some block based coding communities</p>
+            <p>back in the day. do not contact me through there; i will not answer.</p>
+            <p>the real way you can contact me is through bluesky (@dumorando.com)</p>
+            <p>or email (dumorando at proton dot me). im not super famous so i will</p>
+            <p>answer your message unless you decide to contact me throuhg email.</p>
           </content>
           <content id="credits-page">
             <h1>credits</h1>
-            <p>various elements of this website were inspired by <a href="https://billwurtz.com">bill wurtz</a></p>
-            <p>and some from <a href="https://john.citrons.xyz">various websites on johnvertisement</a></p>
-            <p><i>music from oneshot</i></p>
+            <p>various elements of this website were inspired by some of my </p>
+            <p>friends websites and well.. my old website. there used to be a </p>
+            <p>credit to bill wurtz here, but none of the elements on this site</p>
+            <p>remind me of that site. but there is a credit to </p>
+            <p><a href="https://john.citrons.xyz">various websites on johnvertisement</a>! those gave me a lot of ideas</p>
           </content>
           <content id="linktree">
             <h1>my linktree</h1>
-            <p>i can't fit all the links in right here, but i can link to my linktree</p>
-            <a href="https://linktr.ee/dumorando">linktr.ee/dumorando</a>
+            <p>this is <b><i>outdated</i></b> and because of that this is</p>
+            <p>temporarily disabled. i will make a dedicated</p>
+            <p>page to this soon if i remember lol</p>
           </content>
         </div>
       </main-other>
@@ -116,13 +121,21 @@
       </main-but-for-the-right-side>
     </div>
   </main>
+  <div class="bottom">
+    <button id="breakfast" class="button-30">
+      friends
+    </button>
+    <button id="atabook" class="button-30">
+      atabook
+    </button>
+  </div>
   <main id="toosmall">
     <div class="left"></div>
     <div class="middle">
       <main-other>
         <div class="container">
           <h1>screen too small!</h1>
-          <p>maybe try rotating your device?</p>
+          <p>if your on a phone rotate the device!</p>
         </div>
       </main-other>
     </div>
@@ -148,6 +161,7 @@
 
     const randomgreeting = [
       'greetings',
+      'hello there',
       'hey there!',
       'hi.',
       'what\'s up',
@@ -166,9 +180,11 @@
       if (window.innerHeight > window.innerWidth - 75) {
         $('#toosmall').show();
         $('#everything').hide();
+        $('.bottom').hide();
       } else {
         $('#toosmall').hide();
         $('#everything').show();
+        $('.bottom').show();
       }
     }
 
@@ -210,7 +226,8 @@
     }
     window.onhashchange = handlehashchange;
     */
-    document.getElementById('breakfast').addEventListener('click', () => window.location = 'https://breakfast.pages.gay');
+    document.getElementById('breakfast').addEventListener('click', () => window.location = '/extp/friends');
+    $('#atabook').on('click',()=>window.location.href="https://dumorando.atabook.org")
   </script>
 </body>
 

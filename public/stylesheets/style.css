@@ -20,6 +20,22 @@ main {
   height: 100vh;
 }
 
+.bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom > button {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 .left, .right {
   float: left;
   width: 25%;

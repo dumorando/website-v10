@@ -1,0 +1,18 @@
+.atomic-bg {
+    font-family: 'Fira Mono', monospace;
+    background-color: black;
+    background-image: url("/extp/friends/style/imgs/animated_stars.gif");
+    color: white;
+}
+
+box-thing {
+    background-color: #012a7a;
+    text-shadow: 0px 5px #011742;
+    box-shadow: 0px 15px #011742;
+    display: inline-block;
+      margin: 10px;
+      padding: 60px 100px;
+      border-radius: 4px;
+      text-align: center;
+      width: 400px;
+}
